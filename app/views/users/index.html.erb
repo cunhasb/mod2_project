@@ -1,0 +1,7 @@
+
+<%= form_tag("/like", method:"get") do %>
+<%= label_tag(:users, "like")%>
+<% users = User.all.map {|user| [user.name, user.id]}%>
+<%= select_tag(:user, options_for_select(users))%>
+<%= submit_tag("Like")%>
+<%end%>
