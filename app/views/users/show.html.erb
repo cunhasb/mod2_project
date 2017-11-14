@@ -1,18 +1,22 @@
 
-<h1>User Page for <%= @user.name %></h1>
-<br>
+<h1 class="text-center">User Page for <%= @user.name %></h1>
 <h3>People <%= @user.name %> likes:</h3>
 <% if @user.likees.count == 0 %>
-  No likes yet!
+  <br>
+  <p>No likes yet!</p>
+
 <% else %>
   <% @user.likees.each do |likee| %>
   <p>- <%= link_to likee.name, user_path(likee) %></p>
   <%end%>
 <% end %>
-
+<br>
+<br>
 <h3>People that like <%= @user.name %>:</h3>
 <% if @user.likers.count == 0 %>
-  No likes yet!
+  <br>
+  <p>No likes yet!</p>
+
 <% else %>
   <% @user.likers.each do |liker| %>
   <p>- <%= link_to liker.name, user_path(liker) %></p>
