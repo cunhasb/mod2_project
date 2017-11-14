@@ -23,6 +23,7 @@ class UsersController < ApplicationController
   # move to likes_controller?
   def like
     current_user.add_like(params[:user])
+    redirect_to user_path(current_user)
   end
 
   def log_in
