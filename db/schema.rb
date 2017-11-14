@@ -10,11 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171114163236) do
+ActiveRecord::Schema.define(version: 20171114165457) do
 
   create_table "likes", force: :cascade do |t|
     t.integer "liker_id"
     t.integer "likee_id"
+  end
+
+  create_table "profiles", force: :cascade do |t|
+    t.string "attribute_1"
+    t.string "attribute_2"
+    t.string "attribute_3"
+    t.string "attribute_4"
+    t.string "attribute_5"
+    t.string "attribute_6"
+    t.string "attribute_7"
+    t.string "attribute_8"
+    t.string "attribute_9"
+    t.string "attribute_10"
+    t.integer "user_id"
   end
 
   create_table "users", force: :cascade do |t|
