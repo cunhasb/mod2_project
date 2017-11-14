@@ -10,11 +10,10 @@ class User < ApplicationRecord
 
   has_many :received_likes, foreign_key: :likee_id, class_name: "Like"
   has_many :likers, through: :received_likes
-
   has_secure_password
 
   def add_like(other_user_id)
-    
+
     other_user = User.find(other_user_id)
     self.likees << other_user
   end

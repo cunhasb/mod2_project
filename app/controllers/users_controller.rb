@@ -21,11 +21,21 @@ class UsersController < ApplicationController
     current_user.add_like(params[:user])
   end
 
-  def new
-    @user = User.new
+  def log_in
+  end
+
+  def log_user_in
+    user = User.find_by(name: params[:user][:name])
+    if user.authenticate(params[:user][:password])
+      current_user = user
+      redirect_to users_path
+    else
+      render :log_in
+    end
   end
 
   def show
+    @user = User.find(params[:id])
   end
 
   private
