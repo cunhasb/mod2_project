@@ -7,7 +7,10 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
+  <p><%= flash[:notice] %></p>
+  <% if current_user %>
+    <%= link_to "Logout", session_path(current_user), method: "delete" %>
+  <% end %>
   <body>
     <%= yield %>
   </body>
