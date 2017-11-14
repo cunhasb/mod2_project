@@ -3,16 +3,24 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
-  def sign_up
+  def create
     @user = User.new(user_params)
+
     if @user.save
-      session[:user_id]= current_user.id
-      redirect_to "/index"
+      session[:user_id] = @user.id
+      flash[:notice] = "🍧 successful sign up!"
+      redirect_to users_path
     else
-      render :sign_up
+      flash[:notice] = "🦉 Not a valid user!!"
+      render :new
     end
   end
 
+  def new
+    @user = User.new
+  end
+
+  # move to likes_controller?
   def like
     current_user.add_like(params[:user])
   end
@@ -31,10 +39,10 @@ class UsersController < ApplicationController
     end
   end
 
-
   def show
     @user = User.find(params[:id])
   end
+
 
   def edit
     if logged_in?
@@ -60,9 +68,11 @@ class UsersController < ApplicationController
   end
 
 
-private
+  private
+
+
   def user_params
     params.require(:user).permit(:name, :password, :email)
-  end
 
+  end
 end
