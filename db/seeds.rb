@@ -8,9 +8,9 @@
 
 
 
-User.create(name: "Fabiano", password: "hello")
-User.create(name: "Alona", password: "alona")
-User.create(name: "Dick", password: "hi")
+User.create(name: "Fabiano",password: "123")
+User.create(name: "Alona", password: "234")
+User.create(name: "Dick", password: "345")
 
 Like.create(liker_id: 1, likee_id: 2)
 Like.create(liker_id: 1, likee_id: 3)
