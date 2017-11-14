@@ -11,8 +11,8 @@ class User < ApplicationRecord
 
   has_many :received_likes, foreign_key: :likee_id, class_name: "Like"
   has_many :likers, through: :received_likes
-
   has_secure_password
+
   def add_like(other_user_id)
     other_user = User.find(other_user_id)
     current_user.likees << other_user
@@ -22,14 +22,19 @@ class User < ApplicationRecord
    current_user.likees.find(other_user_id).destroy
   end
 
-
-
   def log_in
     #current_user = User.find_or_create_by(name: params[:name])
     current_user = User.first
-
-
   end
+
+  # def user_name_or_current_user
+  #   byebug
+  #   if current_user
+  #     "you"
+  #   else
+  #     @user.name
+  #   end
+  # end
 
 end
 
