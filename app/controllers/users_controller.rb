@@ -16,6 +16,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def new
+    @user = User.new
+  end
+
   # move to likes_controller?
   def like
     current_user.add_like(params[:user])
