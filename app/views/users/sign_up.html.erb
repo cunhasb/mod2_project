@@ -1,9 +1,11 @@
-<h1> Sign In Page </h1>
+<h1> Sign Up Page </h1>
 
 <%= form_for :user do |f|%>
-<%= f.label user.name%>
-<%= f.text user.name%>
-<%= f.label password%>
-<%= f.text password %>
+<%= f.label :user.name%>
+<%= f.text :user.name%>
+<%= f.label :password%>
+<%= f.text :password %>
+<%= f.label :picture %>
+<%= f.file_field :avatar%>
 <%= f.submit%>
 <%end%>

@@ -22,6 +22,7 @@ class UsersController < ApplicationController
 
   # move to likes_controller?
   def like
+
     current_user.add_like(params[:user])
     redirect_to user_path(current_user)
   end
@@ -68,12 +69,18 @@ class UsersController < ApplicationController
     redirect_to users_path
   end
 
+  def like_user
+    current_user.add_like(params[:id])
+    @user = current_user.id
+    redirect_to user_path(current_user)
+  end
+
 
   private
 
 
   def user_params
-    params.require(:user).permit(:name, :password, :email)
+    params.require(:user).permit(:name, :password, :email, :avatar)
 
   end
 end

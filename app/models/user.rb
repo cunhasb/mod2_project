@@ -2,6 +2,7 @@ class User < ApplicationRecord
 
   has_many :given_likes, foreign_key: :liker_id, class_name: "Like"
   has_many :likees, through: :given_likes
+  mount_uploader :avatar, AvatarUploader
 
   has_many :received_likes, foreign_key: :likee_id, class_name: "Like"
   has_many :likers, through: :received_likes
