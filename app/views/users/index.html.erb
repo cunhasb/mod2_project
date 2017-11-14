@@ -1,7 +1,15 @@
 
-<%= form_tag("/like", method:"get") do %>
-<%= label_tag(:users, "like")%>
-<% users = User.all.map {|user| [user.name, user.id]}%>
-<%= select_tag(:user, options_for_select(users))%>
-<%= submit_tag("Like")%>
-<%end%>
+
+
+<h1>Who Do You Like?</h1>
+<% @users.each do |u| %>
+  <ul>
+    <li><%= link_to u.name, user_path(u) %></li>
+    <img src="<%= u.avatar %>" height="250" width="250"/>
+
+    <%=form_for :like, url: "/like/#{u.id}", method:"post" do |f| %>
+      <br><%= f.submit "Like"%></br>
+    <%end%>
+
+  </ul>
+<% end %>

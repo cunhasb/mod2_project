@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   post "/log_in", to: "users#log_user_in"
   get '/like', to: 'users#like'
   get '/sign_up', to: 'users#sign_up'
+  post '/like/:id', to: 'users#like_user'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: 'sessions#log_in'
 end
