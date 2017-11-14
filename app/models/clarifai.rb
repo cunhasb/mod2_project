@@ -2,10 +2,21 @@ class Clarifai
   require 'net/http'
   require 'uri'
   require 'json'
+  attr_accessor :app_key,:model,:image_path
+  attr_reader :g_uri, :request
 
+  def initialize(app_key, model, image_path)
+    # byebug
+    @app_key = app_key
+    @model = model
+    @image_path = image_path
+  end
+
+ # APP_KEY = "f40ee57ffed14e4a8ff5f7d165a34be8"
 # builds the url of the model based on the model name
 # https://api.clarifai.com/v2/models/<MODEL_NAME_ID>/outputs
-def model_url(model_name="general")
+# byebug
+def g_uri
 models = {
   apparel: "e0be3b9d6a454f0493ac3a30784001ff",
   celebrity: "e466caa0619f444ab97497640cefc4dc",
@@ -23,51 +34,40 @@ models = {
   travel: "eee28c313d69466f836ab83287a54ed9",
   wedding: "c386b7a870114f4a87477c0824499348"
 }
- "https://api.clarifai.com/v2/models/#{models[model_name.to_sym]}/outputs"
+ "https://api.clarifai.com/v2/models/#{models[model.to_sym]}/outputs"
+end
+def request
+   uri = URI.parse(self.g_uri)
+request = Net::HTTP::Post.new(uri)
+request.content_type = "application/json"
+request["Authorization"] = "Key #{self.app_key}"
+request.body = JSON.dump({
+  "inputs" => [
+    {
+      "data" => {
+        "image" => {
+          "url" => "#{self.image_path}"
+          # "url" => "https://samples.clarifai.com/metro-north.jpg"
+        }
+      }
+    }
+  ]
+})
+
+req_options = {
+  use_ssl: uri.scheme == "https",
+}
+
+response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+  http.request(request)
+end
+end
+def response
+  self.request.code
 end
 
-# def authorize
-# uri = URI.parse("")
-# request = Net::HTTP::Post.new(uri)
-# request.content_type = "application/json"
-# request["Authorization"] = "Key YOUR_API_KEY"
-#
-# req_options = {
-#   use_ssl: uri.scheme == "https",
-# }
-#
-# response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
-#   http.request(request)
-# end
-#
-#
-#
-# def predict(key,model,url)
-# uri = URI.parse("https://api.clarifai.com/v2/models/aaa03c23b3724a16a56b629203edc62c/outputs")
-# request = Net::HTTP::Post.new(uri)
-# request.content_type = "application/json"
-# request["Authorization"] = "Key YOUR_API_KEY"
-# request.body = JSON.dump({
-#   "inputs" => [
-#     {
-#       "data" => {
-#         "image" => {
-#           "url" => "https://samples.clarifai.com/metro-north.jpg"
-#         }
-#       }
-#     }
-#   ]
-# })
-#
-# req_options = {
-#   use_ssl: uri.scheme == "https",
-# }
-#
-# response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
-#   http.request(request)
-# end
-#
-# # response.code
-# # response.body
-#
+def body
+  JSON.parse(self.request.body)
+end
+
 end

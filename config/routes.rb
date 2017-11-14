@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :params
   resources :users
   resources :sessions
   # delete after changing actions to new and create
