@@ -10,11 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171114011552) do
+ActiveRecord::Schema.define(version: 20171114190810) do
+
+  create_table "labels", force: :cascade do |t|
+    t.string "name"
+  end
 
   create_table "likes", force: :cascade do |t|
     t.integer "liker_id"
     t.integer "likee_id"
+  end
+
+  create_table "preferences", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "label_id"
+  end
+
+  create_table "user_labels", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "label_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -23,6 +37,9 @@ ActiveRecord::Schema.define(version: 20171114011552) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "email"
+    t.string "age_appearance"
+    t.string "gender_appearance"
+    t.string "multicultural_appearance"
   end
 
 end
