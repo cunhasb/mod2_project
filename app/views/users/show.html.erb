@@ -1,3 +1,20 @@
-<%= current_user.name %>
-<%= current_user.email %>
-<%= current_user.password %>
+
+<h1>User Page for <%= @user.name %></h1>
+<br>
+<h3>People <%= @user.name %> likes:</h3>
+<% if @user.likees.count == 0 %>
+  No likes yet!
+<% else %>
+  <% @user.likees.each do |likee| %>
+  <p>- <%= link_to likee.name, user_path(likee) %></p>
+  <%end%>
+<% end %>
+
+<h3>People that like <%= @user.name %>:</h3>
+<% if @user.likers.count == 0 %>
+  No likes yet!
+<% else %>
+  <% @user.likers.each do |liker| %>
+  <p>- <%= link_to liker.name, user_path(liker) %></p>
+  <% end %>
+<%end%>

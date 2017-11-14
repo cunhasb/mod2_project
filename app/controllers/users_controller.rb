@@ -22,7 +22,6 @@ class UsersController < ApplicationController
 
   def log_user_in
     user = User.find_by(name: params[:user][:name])
-
     if user.authenticate(params[:user][:password])
       current_user = user
       session[:user_id]= current_user.id
@@ -34,6 +33,7 @@ class UsersController < ApplicationController
 
 
   def show
+    @user = User.find(params[:id])
   end
 
   def edit
