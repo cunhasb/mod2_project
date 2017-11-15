@@ -69,6 +69,29 @@ def body
   JSON.parse(self.request.body)
 end
 
+def body_byte
+  JSON.parse(self.request.body)
+end
+
+def request_byte
+
+uri = URI.parse("https://api.clarifai.com/v2/models/aaa03c23b3724a16a56b629203edc62c/outputs")
+request = Net::HTTP::Post.new(uri)
+request.content_type = "application/json"
+request["Authorization"] = "Key #{self.app_key}"
+request.body = ""
+request.body << File.read("#{self.image_path}").delete("\r\n")
+
+req_options = {
+  use_ssl: uri.scheme == "https",
+}
+
+response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+  http.request(request)
+end
+
+end
+
 
 
 # key = Param.first.app_key
