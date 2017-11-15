@@ -8,14 +8,30 @@
   <p><br>
   <%= f.label :picture %>
   <%= f.file_field :avatar %>
-  <%= f.label :preferences %>
+
+
+  <h2> We Want to Learn More about You </h2>
+  <p> Please select one of the following options for each question</p>
+  <%= f.label "on my weekend:" %>
   <input id="preferences_swimming" name="preference_check" type="checkbox" value="https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-9/18700140_10154942083293071_8370634500906125912_n.jpg?oh=d244bfcd552f86e4870bab300ddf9f66&oe=5A9983CF">
-    <label for="preferences: swimming"> I like Swimming</label>
+    <label for="preferences: swimming"> I like to Go Wild!!!!</label>
   <input id="preferences_relaxing" name="preference_check" type="checkbox" value="http://s3.amazonaws.com/zacflix/uploads/monk.jpg" />
     <label for="preferences_relaxing">I like to chill</label>
-
   <p><br>
-  <%= f.submit %>
+  <%= f.label "I would prefer to eat:" %>
+    <input id="preferences_sushi" name="preference_check" type="checkbox" value="https://img.grouponcdn.com/deal/hfefAup1zQWBE2K8sWURgS27xax/hf-846x508/v1/c700x420.jpg">
+      <label for="preferences: swimming"> Sushi</label>
+    <input id="preferences_pizza" name="preference_check" type="checkbox" value="https://pantograph0.goldbely.com/uploads/product_image/image/11711/authentic-new-york-pizza.089cd28a335e19c3e282c99dc41622ed.jpg" />
+      <label for="preferences_pizza">Pizza</label>
+    <p><br>
+    <%= f.label "Drink of Choice:" %>
+      <input id="preferences_cosmo" name="preference_check" type="checkbox" value="https://cdn.liquor.com/wp-content/uploads/2010/05/03124724/the-cosmo.jpg">
+        <label for="preferences: swimming"> Cosmo</label>
+      <input id="preferences_rum" name="preference_check" type="checkbox" value="https://assets3.thrillist.com/v1/image/1707949/size/tmg-article_default_mobile.jpg" />
+        <label for="preferences_relaxing">Rum anything</label>
+      <input id="preferences_none" name="preference_check" type="checkbox" value="https://media1.britannica.com/eb-media/02/157502-131-7C5D3A67.jpg" />
+        <label for="preferences_relaxing">What's Alcohol?</label>
+  <br><%= f.submit %></br>
 <% end %>
 
   <!-- <h1> Show Us More About Yourself!</h1>
