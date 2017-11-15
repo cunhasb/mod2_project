@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20171115152449) do
   create_table "likes", force: :cascade do |t|
     t.integer "liker_id"
     t.integer "likee_id"
+    t.index ["liker_id", "likee_id"], name: "index_likes_on_liker_id_and_likee_id", unique: true
   end
 
   create_table "params", force: :cascade do |t|

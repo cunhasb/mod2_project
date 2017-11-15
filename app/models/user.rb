@@ -13,9 +13,10 @@ class User < ApplicationRecord
   has_secure_password
 
   def add_like(other_user_id)
-
     other_user = User.find(other_user_id)
-    self.likees << other_user
+    if !self.likees.include?(other_user)
+      self.likees << other_user
+    end
   end
 
   def unlike(other_user)
