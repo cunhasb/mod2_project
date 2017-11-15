@@ -19,8 +19,9 @@ class User < ApplicationRecord
     end
   end
 
-  def unlike(other_user)
-   self.likees.find(other_user_id).destroy
+  def unlike(other_user_id)
+   like = Like.find_by(liker_id: self.id, likee_id:other_user_id.to_i)
+   like.destroy
   end
 
   def log_in

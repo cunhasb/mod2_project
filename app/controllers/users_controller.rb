@@ -23,10 +23,11 @@ class UsersController < ApplicationController
 
   # move to likes_controller?
   def like
-
     current_user.add_like(params[:user])
     redirect_to user_path(current_user)
   end
+
+
 
   def log_in
   end
@@ -62,7 +63,7 @@ class UsersController < ApplicationController
       render :edit
     else
     redirect_to user_path
-  end
+    end
   end
 
   def destroy
@@ -73,6 +74,11 @@ class UsersController < ApplicationController
   def like_user
     current_user.add_like(params[:id])
     @user = current_user.id
+    redirect_to user_path(current_user)
+  end
+
+  def unlike
+    current_user.unlike(params[:id])
     redirect_to user_path(current_user)
   end
 

@@ -3,11 +3,19 @@
   <h3>People you like:</h3>
 <% else %>
   <h1 class="text-center">User Page for <%= @user.name %>
+    <% if !current_user.likees.include?(@user)%>
     <%=form_for :like, url: "/like/#{@user.id}", method:"post" do |f| %>
      <label>
       <p class="btn btn-primary"  >I like <%= @user.name %>!  <%= f.submit "Like", type: :image, src: "/images/SparklingHeart.png", width: "30"%></p>
     </label>
-    <% end %>
+      <% end %>
+    <% else %>
+    <%=form_for :like, url: "/unlike/#{@user.id}", method:"post" do |f| %>
+     <label>
+      <p class="btn btn-primary"  >I no longer like <%= @user.name %>!  <%= f.submit "Like", type: :image, src: "/images/SparklingHeart.png", width: "30"%></p>
+    </label>
+      <% end %>
+<% end %>
   </h1>
 
   <h3>People <%= @user.name %> likes:</h3>
