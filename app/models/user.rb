@@ -28,6 +28,14 @@ class User < ApplicationRecord
 
   def log_in
   end
+
+  def add_demographics
+    byebug
+    demographics= Demographics.new(Param.first.app_key,self.avatar.path)
+    self.age_appearance = demographics.age.first
+    self.gender_appearance = demographics.gender.first
+    self.multicultural_appearance = demographics.multicultural.first
+  end
 end
 
 # has_many :follower_relationships, foreign_key: :following_id, class_name: 'Follow'

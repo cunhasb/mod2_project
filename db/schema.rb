@@ -44,10 +44,10 @@ ActiveRecord::Schema.define(version: 20171114192335) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "email"
+    t.string "avatar"
     t.string "age_appearance"
     t.string "gender_appearance"
     t.string "multicultural_appearance"
-    t.string "avatar"
   end
 
 end
