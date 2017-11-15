@@ -5,11 +5,15 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    @user.add_demographics
 
     if @user.save
       session[:user_id] = @user.id
       flash[:notice] = "🍧 successful sign up!"
+      Profile.create(user_id: current_user.id)
+      Preference.create(user_id: current_user.id)
+      current_user.add_profile
+      current_user.add_preference(params[:preference_check])
+
       redirect_to users_path
     else
       flash[:notice] = "🦉 Not a valid user!!"
@@ -23,11 +27,10 @@ class UsersController < ApplicationController
 
   # move to likes_controller?
   def like
+
     current_user.add_like(params[:user])
     redirect_to user_path(current_user)
   end
-
-
 
   def log_in
   end
@@ -59,13 +62,11 @@ class UsersController < ApplicationController
 
   def update
     current_user.update(user_params)
-    current_user.add_profile
-    current_user.add_preference
     if current_user.errors.any?
       render :edit
     else
     redirect_to user_path
-    end
+  end
   end
 
   def destroy
@@ -76,11 +77,6 @@ class UsersController < ApplicationController
   def like_user
     current_user.add_like(params[:id])
     @user = current_user.id
-    redirect_to user_path(current_user)
-  end
-
-  def unlike
-    current_user.unlike(params[:id])
     redirect_to user_path(current_user)
   end
 

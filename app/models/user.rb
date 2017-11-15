@@ -13,28 +13,25 @@ class User < ApplicationRecord
   has_secure_password
 
   def add_like(other_user_id)
+
     other_user = User.find(other_user_id)
-    if !self.likees.include?(other_user)
-      self.likees << other_user
-    end
+    self.likees << other_user
   end
 
-  def unlike(other_user_id)
-   like = Like.find_by(liker_id: self.id, likee_id:other_user_id.to_i)
-   like.destroy
+  def unlike(other_user)
+   self.likees.find(other_user_id).destroy
   end
 
   def log_in
   end
   def add_preference(image_path="http://www.exmooradventures.co.uk/wp-content/uploads/2013/01/DSCN59891.jpg",elements=20)
     pref= Concepts.new(Param.first.app_key,image_path)
-    pref.labels[0...elements].each{|label|self.preference.labels << label}
+    pref.labels[0...elements].each{|label|self.preference.labels << Label.create(name: label)}
   end
 
   def add_profile(image_path="https://www.gannett-cdn.com/-mm-/9ca0093dea60cacd58a897ab56282e0c75635558/c=172-0-2828-1997&r=x513&c=680x510/local/-/media/2017/07/28/USATODAY/USATODAY/636368386172605527-AFP-AFP-QE0OJ.jpg")
-    # demo= Demographics.new(Param.first.app_key,self.avatar.path)
     demo= Demographics.new(Param.first.app_key,image_path)
-    demo.demographics.keys.each{|x|self.profile.labels << demo.demographics[x]["concepts"].first["name"]}
+    demo.demographics.keys.each{|x|self.profile.labels << Label.create(name: demo.demographics[x]["concepts"].first["name"])}
   end
 end
 
