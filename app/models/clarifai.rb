@@ -3,10 +3,9 @@ class Clarifai
   require 'uri'
   require 'json'
   attr_accessor :app_key,:model,:image_path
-  attr_reader :g_uri, :request
+  # attr_reader :g_uri, :request
 
   def initialize(app_key, model, image_path)
-    # byebug
     @app_key = app_key
     @model = model
     @image_path = image_path
@@ -69,5 +68,40 @@ end
 def body
   JSON.parse(self.request.body)
 end
+
+def body_byte
+  JSON.parse(self.request.body)
+end
+
+def request_byte
+
+uri = URI.parse("https://api.clarifai.com/v2/models/aaa03c23b3724a16a56b629203edc62c/outputs")
+request = Net::HTTP::Post.new(uri)
+request.content_type = "application/json"
+request["Authorization"] = "Key #{self.app_key}"
+request.body = ""
+request.body << File.read("#{self.image_path}").delete("\r\n")
+
+req_options = {
+  use_ssl: uri.scheme == "https",
+}
+
+response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+  http.request(request)
+end
+
+end
+
+
+
+# key = Param.first.app_key
+#
+# metro = "https://samples.clarifai.com/metro-north.jpg"
+# angelina = "http://cdn.playbuzz.com/cdn/11572c25-3aa8-41c5-8fef-795de51e4346/ee72093c-3c01-433a-8d25-701cca06c975.jpg"
+#
+# concept_call = Concepts.new(key,metro)
+# demographics_call = Demographics.new(key,angelina)
+# celebrity_call = Celebrity.new(key,angelina)
+# general_call= Clarifai.new(key,model,image_url)
 
 end

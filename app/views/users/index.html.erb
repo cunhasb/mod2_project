@@ -2,14 +2,21 @@
 
 
 <h1>Who Do You Like?</h1>
+<div class="row ">
+
 <% @users.each do |u| %>
-  <ul>
-    <li><%= link_to u.name, user_path(u) %></li>
-    <img src="<%= u.avatar %>" height="250" width="250"/>
+  <div class="card text-center" style="width: 20rem;">
+    <%= link_to user_path(u) do%>
+        <%= image_tag u.avatar, class:"rounded-circle", style:"max-height: 300px; max-width: 300px" %>
+        <%end%>
+
 
     <%=form_for :like, url: "/like/#{u.id}", method:"post" do |f| %>
-      <br><%= f.submit "Like"%></br>
+     <label>
+      <p class="btn btn-primary"  >I like <%= u.name %>!  <%= f.submit "Like", type: :image, src: "/images/SparklingHeart.png", width: "30"%></p>
+    </label>
+  </br>
+</div>
     <%end%>
-
-  </ul>
 <% end %>
+</div>
