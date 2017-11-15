@@ -33,6 +33,14 @@ class User < ApplicationRecord
     demo= Demographics.new(Param.first.app_key,image_path)
     demo.demographics.keys.each{|x|self.profile.labels << Label.create(name: demo.demographics[x]["concepts"].first["name"])}
   end
+
+  def preference_labels_with_names
+    self.preference.labels.map{|label|label.name}
+  end
+
+  def profile_labels_with_names
+    self.profile.labels.map{|label|label.name}
+  end
 end
 
 # has_many :follower_relationships, foreign_key: :following_id, class_name: 'Follow'
