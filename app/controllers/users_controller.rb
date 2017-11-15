@@ -79,7 +79,11 @@ class UsersController < ApplicationController
     @user = current_user.id
     redirect_to user_path(current_user)
   end
-
+  
+  def unlike
+      current_user.unlike(params[:id])
+      redirect_to user_path(current_user)
+    end
 
   private
 
