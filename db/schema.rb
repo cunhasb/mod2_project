@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171114190810) do
+ActiveRecord::Schema.define(version: 20171115152449) do
 
   create_table "labels", force: :cascade do |t|
     t.string "name"
@@ -21,14 +21,35 @@ ActiveRecord::Schema.define(version: 20171114190810) do
     t.integer "likee_id"
   end
 
+  create_table "params", force: :cascade do |t|
+    t.string "project_name"
+    t.string "app_key"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "preference_labels", force: :cascade do |t|
+    t.integer "preference_id"
+    t.integer "label_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "preferences", force: :cascade do |t|
     t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "profile_labels", force: :cascade do |t|
+    t.integer "profile_id"
     t.integer "label_id"
   end
 
-  create_table "user_labels", force: :cascade do |t|
+  create_table "profiles", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "label_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

@@ -6,12 +6,8 @@ class User < ApplicationRecord
   has_many :received_likes, foreign_key: :likee_id, class_name: "Like"
   has_many :likers, through: :received_likes
 
-  has_many :preferences
-  has_many :user_labels
-  has_many :labels, through: :user_labels
-  has_many :labels, through: :preferences
-
-
+  has_one :preference
+  has_one :profile
 
   has_secure_password
 
