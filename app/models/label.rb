@@ -1,7 +1,4 @@
 class Label < ApplicationRecord
-  has_many :user_labels
-  has_many :users, through: :user_labels
-
-  has_many :preferences
-  has_many :users, through: :preferences
+  has_many :profile_labels
+  has_many :profiles, through: :profile_labels
 end

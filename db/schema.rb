@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171114192335) do
+ActiveRecord::Schema.define(version: 20171115152449) do
 
   create_table "labels", force: :cascade do |t|
     t.string "name"
@@ -28,14 +28,28 @@ ActiveRecord::Schema.define(version: 20171114192335) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "preference_labels", force: :cascade do |t|
+    t.integer "preference_id"
+    t.integer "label_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "preferences", force: :cascade do |t|
     t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "profile_labels", force: :cascade do |t|
+    t.integer "profile_id"
     t.integer "label_id"
   end
 
-  create_table "user_labels", force: :cascade do |t|
+  create_table "profiles", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "label_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
