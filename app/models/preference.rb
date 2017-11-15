@@ -1,4 +1,5 @@
 class Preference < ApplicationRecord
   belongs_to :user
-  belongs_to :label
+  has_many :preference_labels
+  has_many :labels, through: :preference_labels
 end
