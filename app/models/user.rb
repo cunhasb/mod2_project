@@ -24,13 +24,15 @@ class User < ApplicationRecord
 
   def log_in
   end
+  def add_preference(image_path="http://www.exmooradventures.co.uk/wp-content/uploads/2013/01/DSCN59891.jpg",elements=20)
+    pref= Concepts.new(Param.first.app_key,image_path)
+    pref.labels[0...elements].each{|label|self.preference.labels << label}
+  end
 
-  def add_demographics
-    byebug
-    demographics= Demographics.new(Param.first.app_key,self.avatar.path)
-    self.age_appearance = demographics.age.first
-    self.gender_appearance = demographics.gender.first
-    self.multicultural_appearance = demographics.multicultural.first
+  def add_profile(image_path="https://www.gannett-cdn.com/-mm-/9ca0093dea60cacd58a897ab56282e0c75635558/c=172-0-2828-1997&r=x513&c=680x510/local/-/media/2017/07/28/USATODAY/USATODAY/636368386172605527-AFP-AFP-QE0OJ.jpg")
+    # demo= Demographics.new(Param.first.app_key,self.avatar.path)
+    demo= Demographics.new(Param.first.app_key,image_path)
+    demo.demographics.keys.each{|x|self.profile.labels << demo.demographics[x]["concepts"].first["name"]}
   end
 end
 

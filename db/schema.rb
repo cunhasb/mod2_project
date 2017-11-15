@@ -37,12 +37,6 @@ ActiveRecord::Schema.define(version: 20171115152449) do
 
   create_table "preferences", force: :cascade do |t|
     t.integer "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "profile_labels", force: :cascade do |t|
-    t.integer "profile_id"
     t.integer "label_id"
   end
 
@@ -50,6 +44,11 @@ ActiveRecord::Schema.define(version: 20171115152449) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "user_labels", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "label_id"
   end
 
   create_table "users", force: :cascade do |t|

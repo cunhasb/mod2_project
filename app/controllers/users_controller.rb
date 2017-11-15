@@ -58,6 +58,8 @@ class UsersController < ApplicationController
 
   def update
     current_user.update(user_params)
+    current_user.add_profile
+    current_user.add_preference
     if current_user.errors.any?
       render :edit
     else
