@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    # @user.add_demographics
+    @user.add_demographics
 
     if @user.save
       session[:user_id] = @user.id
@@ -59,6 +59,8 @@ class UsersController < ApplicationController
 
   def update
     current_user.update(user_params)
+    current_user.add_profile
+    current_user.add_preference
     if current_user.errors.any?
       render :edit
     else

@@ -36,7 +36,7 @@ models = {
  "https://api.clarifai.com/v2/models/#{models[model.to_sym]}/outputs"
 end
 def request
-   uri = URI.parse(self.g_uri)
+uri = URI.parse(self.g_uri)
 request = Net::HTTP::Post.new(uri)
 request.content_type = "application/json"
 request["Authorization"] = "Key #{self.app_key}"
@@ -56,7 +56,6 @@ request.body = JSON.dump({
 req_options = {
   use_ssl: uri.scheme == "https",
 }
-
 response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
   http.request(request)
 end
@@ -74,21 +73,31 @@ def body_byte
 end
 
 def request_byte
+  uri = URI.parse(self.g_uri)
+  request = Net::HTTP::Post.new(uri)
+  request.content_type = "application/json"
+  request["Authorization"] = "Key #{self.app_key}"
+  puts "--------------------------I AM HERE --------------------------"
+  request.body = JSON.dump({
+    "inputs" => [
+      {
+        "data" => {
+          "image" => {
+            "base64" => "#{self.image_path}"
+            # "url" => "https://samples.clarifai.com/metro-north.jpg"
+          }
+        }
+      }
+    ]
+  })
 
-uri = URI.parse("https://api.clarifai.com/v2/models/aaa03c23b3724a16a56b629203edc62c/outputs")
-request = Net::HTTP::Post.new(uri)
-request.content_type = "application/json"
-request["Authorization"] = "Key #{self.app_key}"
-request.body = ""
-request.body << File.read("#{self.image_path}").delete("\r\n")
+  req_options = {
+    use_ssl: uri.scheme == "https",
+  }
 
-req_options = {
-  use_ssl: uri.scheme == "https",
-}
-
-response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
-  http.request(request)
-end
+  response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+    http.request(request)
+  end
 
 end
 
