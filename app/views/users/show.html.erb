@@ -1,6 +1,25 @@
+<% if @user == current_user %>
+  <h1 class="text-center">Profile Page</h1>
+  <h3>People you like:</h3>
+<% else %>
+  <h1 class="text-center">User Page for <%= @user.name %>
+    <% if !current_user.likees.include?(@user)%>
+    <%=form_for :like, url: "/like/#{@user.id}", method:"post" do |f| %>
+     <label>
+      <p class="btn btn-primary"  >I like <%= @user.name %>!  <%= f.submit "Like", type: :image, src: "/images/SparklingHeart.png", width: "30"%></p>
+    </label>
+      <% end %>
+    <% else %>
+    <%=form_for :like, url: "/unlike/#{@user.id}", method:"post" do |f| %>
+     <label>
+      <p class="btn btn-primary"  >I no longer like <%= @user.name %>!  <%= f.submit "Like", type: :image, src: "/images/SparklingHeart.png", width: "30"%></p>
+    </label>
+      <% end %>
+<% end %>
+  </h1>
 
-<h1 class="text-center">User Page for <%= @user.name %></h1>
-<h3>People <%= @user.name %> likes:</h3>
+  <h3>People <%= @user.name %> likes:</h3>
+<% end %>
 <% if @user.likees.count == 0 %>
   <br>
   <p>No likes yet!</p>
@@ -12,7 +31,11 @@
 <% end %>
 <br>
 <br>
-<h3>People that like <%= @user.name %>:</h3>
+<% if @user == current_user %>
+  <h3>People that like you!</h3>
+<% else %>
+  <h3>People that like <%= @user.name %>:</h3>
+<% end %>
 <% if @user.likers.count == 0 %>
   <br>
   <p>No likes yet!</p>

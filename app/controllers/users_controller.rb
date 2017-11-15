@@ -6,11 +6,15 @@ class UsersController < ApplicationController
   def create
     byebug
     @user = User.new(user_params)
-    # @user.add_demographics
 
     if @user.save
       session[:user_id] = @user.id
       flash[:notice] = "🍧 successful sign up!"
+      Profile.create(user_id: current_user.id)
+      Preference.create(user_id: current_user.id)
+      current_user.add_profile
+      current_user.add_preference(params[:preference_check])
+
       redirect_to users_path
     else
       flash[:notice] = "🦉 Not a valid user!!"
