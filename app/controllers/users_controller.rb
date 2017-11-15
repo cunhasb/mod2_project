@@ -79,11 +79,24 @@ class UsersController < ApplicationController
     @user = current_user.id
     redirect_to user_path(current_user)
   end
-  
+
   def unlike
-      current_user.unlike(params[:id])
-      redirect_to user_path(current_user)
+    current_user.unlike(params[:id])
+    redirect_to user_path(current_user)
     end
+
+  def match(user)
+    User.all.each_with_object(matches= {}) do |user|
+      if current_user != user
+        byebug
+        common = current_user.preference_labels_with_names & user.profile_labels_with_names
+        matches[user]=common.count
+      end
+    end
+
+  end
+
+
 
   private
 
