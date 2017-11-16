@@ -11,7 +11,7 @@ class Clarifai
     @image_path = image_path
   end
 
- # APP_KEY = "f40ee57ffed14e4a8ff5f7d165a34be8"
+
 # builds the url of the model based on the model name
 # https://api.clarifai.com/v2/models/<MODEL_NAME_ID>/outputs
 # byebug
@@ -73,44 +73,52 @@ def body_byte
 end
 
 def request_byte
-  uri = URI.parse(self.g_uri)
-  request = Net::HTTP::Post.new(uri)
-  request.content_type = "application/json"
-  request["Authorization"] = "Key #{self.app_key}"
-  puts "--------------------------I AM HERE --------------------------"
+url = URI.parse(self.g_uri)
+http = Net::HTTP.new(url.host, url.port)
+http.use_ssl = true
+http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+request = Net::HTTP::Post.new(url)
+request["authorization"] = "Key #{self.app_key}"
+request["content-type"] = 'application/json'
+
+# request.body = JSON.dump({
+#   "inputs" => [
+#     {
+#       "data" => {
+#         "image" => {
+#           "base64" => "#{encode(self.image_path)}"
+#           # "url" => "https://samples.clarifai.com/metro-north.jpg"
+#         }
+#       }
+#     }
+#   ]
+# })
+request.body = x
+puts request.body
+request.body = "{\"inputs\": [{\"id\": \"456\",\"data\":{\"image\":\"base64\":\"#{encode\(image_path\)}\)\"\)}\" }}}]}"
+response = http.request(request)
+
+end
+
+def encode(file_path)
+  Base64.encode64(File.open("#{file_path}").read)
+end
+
+def x
   request.body = JSON.dump({
     "inputs" => [
       {
-        "data" => {
-          "image" => {
-            "base64" => "#{self.image_path}"
-            # "url" => "https://samples.clarifai.com/metro-north.jpg"
-          }
+          # "id" => {"456"},
+          "data" => {
+            "image" => {
+                "base64" => "#{encode(self.image_path)}"
+                # "url" => "https://samples.clarifai.com/metro-north.jpg"
+              }
         }
       }
     ]
   })
-
-  req_options = {
-    use_ssl: uri.scheme == "https",
-  }
-
-  response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
-    http.request(request)
-  end
-
 end
-
-
-
-# key = Param.first.app_key
-#
-# metro = "https://samples.clarifai.com/metro-north.jpg"
-# angelina = "http://cdn.playbuzz.com/cdn/11572c25-3aa8-41c5-8fef-795de51e4346/ee72093c-3c01-433a-8d25-701cca06c975.jpg"
-#
-# concept_call = Concepts.new(key,metro)
-# demographics_call = Demographics.new(key,angelina)
-# celebrity_call = Celebrity.new(key,angelina)
-# general_call= Clarifai.new(key,model,image_url)
 
 end
