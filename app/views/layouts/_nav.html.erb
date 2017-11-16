@@ -1,0 +1,8 @@
+<% if current_user %>
+  <ul>
+    <li><%= link_to 'Home', user_path(current_user) %></li>
+    <li><%= link_to 'Matches', users_path %></li>
+    <li><%= link_to 'Edit Profile', edit_user_path(current_user) %></li>
+    <li><%= link_to 'Logout', session_path(current_user), method: "delete" %></li>
+  </ul>
+<% end %>
