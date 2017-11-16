@@ -5,9 +5,9 @@
   </ul>
     <% end %>
 <% end %>
-
+<div class = "jumbotron text-center" style="height: 200px">
 <h1>Update Page</h1>
-<%= link_to 'Delete Profile',  user_path, data: { confirm: 'Are you sure?' }, method: :delete %>
+</div>
 <%= form_for @user do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>
@@ -19,3 +19,5 @@
   <%#= f.text_field :confirm_password %>
   <%= f.submit %>
   <% end %>
+  <div class="float-right" style="margin-right: 150px"><%= link_to 'Delete Profile',  user_path, data: { confirm: 'Are you sure?' }, method: :delete %>
+  </div>
