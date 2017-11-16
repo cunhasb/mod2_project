@@ -2,6 +2,7 @@ class Clarifai
   require 'net/http'
   require 'uri'
   require 'json'
+  require 'base64'
   attr_accessor :app_key,:model,:image_path
   # attr_reader :g_uri, :request
 
@@ -60,6 +61,7 @@ response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
   http.request(request)
 end
 end
+
 def response
   self.request.code
 end
@@ -69,56 +71,38 @@ def body
 end
 
 def body_byte
-  JSON.parse(self.request.body)
+  JSON.parse(self.request_byte.body)
 end
 
 def request_byte
-url = URI.parse(self.g_uri)
-http = Net::HTTP.new(url.host, url.port)
-http.use_ssl = true
-http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+  uri = URI.parse(self.g_uri)
+  # uri = URI.parse("https://api.clarifai.com/v2/models/aaa03c23b3724a16a56b629203edc62c/outputs")
+  request = Net::HTTP::Post.new(uri)
 
-request = Net::HTTP::Post.new(url)
-request["authorization"] = "Key #{self.app_key}"
-request["content-type"] = 'application/json'
+  request.content_type = "application/json"
+  request["Authorization"] = "Key #{self.app_key}"
 
-# request.body = JSON.dump({
-#   "inputs" => [
-#     {
-#       "data" => {
-#         "image" => {
-#           "base64" => "#{encode(self.image_path)}"
-#           # "url" => "https://samples.clarifai.com/metro-north.jpg"
-#         }
-#       }
-#     }
-#   ]
-# })
-request.body = x
-puts request.body
-request.body = "{\"inputs\": [{\"id\": \"456\",\"data\":{\"image\":\"base64\":\"#{encode\(image_path\)}\)\"\)}\" }}}]}"
-response = http.request(request)
+  encoded_file = Base64.encode64(File.open("/Users/cunha/development/mod2_project/public/images/Dick_right_Size.jpg", "rb").read)
 
-end
-
-def encode(file_path)
-  Base64.encode64(File.open("#{file_path}").read)
-end
-
-def x
-  request.body = JSON.dump({
-    "inputs" => [
-      {
-          # "id" => {"456"},
-          "data" => {
-            "image" => {
-                "base64" => "#{encode(self.image_path)}"
-                # "url" => "https://samples.clarifai.com/metro-north.jpg"
-              }
+  body = {
+    inputs: [
+      data: {
+        image: {
+          base64: encoded_file
         }
       }
     ]
-  })
+  }
+
+  request.body = body.to_json
+
+  req_options = { use_ssl: uri.scheme == "https", }
+
+  response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+    http.request(request)
 end
+
+end
+
 
 end

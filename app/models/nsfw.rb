@@ -1,9 +1,13 @@
 require 'Clarifai'
 class NSFW
-  def initialize(app_key,image_url)
+  def initialize(app_key,image_url,type="byte")
     @app_key = app_key
     @image_url = image_url
-    @request = Clarifai.new(app_key,"nsfw",image_url).body
+    if type == "byte"
+      @request = Clarifai.new(app_key,"nsfw",image_url).body_byte
+    else
+      @request = Clarifai.new(app_key,"nsfw",image_url).body
+    end 
   end
 
   def nsfw_name

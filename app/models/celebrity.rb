@@ -1,9 +1,14 @@
 require 'Clarifai'
 class Celebrity
-  def initialize(app_key,image_url)
+  def initialize(app_key,image_url,type="byte")
     @app_key = app_key
     @image_url = image_url
-    @request = Clarifai.new(app_key,"celebrity",image_url).body
+    if type == "byte"
+      @request = Clarifai.new(app_key,"celebrity",image_url).body_byte
+    else
+      @request = Clarifai.new(app_key,"celebrity",image_url).body
+    end
+
   end
 
   def celebrity
@@ -13,4 +18,5 @@ class Celebrity
   def celebrity_name
     self.celebrity.map{|celebrity|celebrity["name"]}
   end
+
 end
