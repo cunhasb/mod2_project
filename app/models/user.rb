@@ -41,6 +41,30 @@ class User < ApplicationRecord
   def profile_labels_with_names
     self.profile.labels.map{|label|label.name}
   end
+
+#returns a sorted array of users objects with commonality scores
+  def match
+    User.all.each_with_object(matches= {}) do |user|
+      if self != user
+        common = self.preference_labels_with_names & user.profile_labels_with_names
+        matches[user]=common.count
+      end
+    end.sort_by { |user, score| score }.reverse
+  end
+
+#removes commonality scores from array
+def match_no_scores
+  match.map{|user| user[0]}
+end
+
+#returns sorted array of users objects with commonality scores who were matched
+  def matches_only
+    match.select{|user| user[1] > 0 }
+  end
+
+  def matches_only_no_score
+    matches_only.map{|user| user[0]}
+  end
 end
 
 # has_many :follower_relationships, foreign_key: :following_id, class_name: 'Follow'
