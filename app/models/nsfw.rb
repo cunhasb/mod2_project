@@ -6,11 +6,16 @@ class NSFW
     @request = Clarifai.new(app_key,"nsfw",image_url).body
   end
 
-  def nsfw
+  def nsfw_name
     @request.values[1][0]["data"]["concepts"][0]["name"]
   end
 
-  # def celebrity_name
-  #   self.celebrity.map{|celebrity|celebrity["name"]}
-  # end
+  def nsfw?
+    if nsfw_name == "sfw"
+      false
+    else
+      true
+    end
+  end
+
 end
