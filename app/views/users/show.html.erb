@@ -1,5 +1,7 @@
+<div class="jumbotron" style="height: 200px">
 <% if @user == current_user %>
   <h1 class="text-center">Profile Page</h1>
+</div>
   <h3>People you like:</h3>
 <% else %>
   <h1 class="text-center">User Page for <%= @user.name %>
@@ -17,7 +19,6 @@
       <% end %>
 <% end %>
   </h1>
-
   <h3>People <%= @user.name %> likes:</h3>
 <% end %>
 <% if @user.likees.count == 0 %>

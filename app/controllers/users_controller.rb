@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   end
 
   def create
+    byebug
     @user = User.new(user_params)
 
     if @user.save
@@ -11,7 +12,6 @@ class UsersController < ApplicationController
       flash[:notice] = "🍧 successful sign up!"
       Profile.create(user_id: current_user.id)
       Preference.create(user_id: current_user.id)
-      byebug
       current_user.add_profile
       current_user.add_preference(params[:preference_check])
 
