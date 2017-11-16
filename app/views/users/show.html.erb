@@ -46,3 +46,13 @@
   <p>- <%= link_to liker.name, user_path(liker) %></p>
   <% end %>
 <%end%>
+
+Preferences
+<% @user.preference.labels.each do |label| %>
+<p>- <%= label.name %></p>
+<% end %>
+
+Profile
+<% @user.profile.labels.each do |label| %>
+<p>- <%= label.name %></p>
+<% end %>

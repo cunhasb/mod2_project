@@ -4,8 +4,9 @@ class UsersController < ApplicationController
   end
 
   def create
-    byebug
+
     @user = User.new(user_params)
+
 
     if @user.save
       session[:user_id] = @user.id
@@ -13,8 +14,11 @@ class UsersController < ApplicationController
       Profile.create(user_id: current_user.id)
       Preference.create(user_id: current_user.id)
       current_user.add_profile
-      current_user.add_preference(params[:preference_check])
-
+      current_user.add_preference(params[:preference_check1])
+      current_user.add_preference(params[:preference_check2])
+      current_user.add_preference(params[:preference_check3])
+      current_user.add_preference(params[:preference_check4])
+      byebug
       redirect_to users_path
     else
       flash[:notice] = "🦉 Not a valid user!!"
