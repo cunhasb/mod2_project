@@ -31,11 +31,19 @@ class User < ApplicationRecord
   end
 
   def add_profile(image_path="https://www.gannett-cdn.com/-mm-/9ca0093dea60cacd58a897ab56282e0c75635558/c=172-0-2828-1997&r=x513&c=680x510/local/-/media/2017/07/28/USATODAY/USATODAY/636368386172605527-AFP-AFP-QE0OJ.jpg")
-    demo= Demographics.new(Param.first.app_key,image_path,"byte")
-    demo.demographics.keys.each{|x|self.profile.labels << Label.create(name: demo.demographics[x]["concepts"].first["name"])}
-    pref= Concepts.new(Param.first.app_key,image_path,"byte")
-    pref.labels[0...5].each{|label|self.profile.labels << Label.create(name: label)}
-  end
+      demo= Demographics.new(Param.first.app_key,image_path,"byte")
+      demo.demographics.keys.each do |x|
+        label = Label.create(name: demo.demographics[x]["concepts"].first["name"])
+        self.profile.labels << label
+        if self.demo
+        self.demo = self.demo << "," << label.name
+        else
+          self.demo = label.name
+        end
+      end
+      pref= Concepts.new(Param.first.app_key,image_path,"byte")
+      pref.labels[0...5].each{|label|self.profile.labels << Label.create(name: label)}
+    end
 
   def add_celebrity(image_path="https://www.gannett-cdn.com/-mm-/9ca0093dea60cacd58a897ab56282e0c75635558/c=172-0-2828-1997&r=x513&c=680x510/local/-/media/2017/07/28/USATODAY/USATODAY/636368386172605527-AFP-AFP-QE0OJ.jpg")
     demo= Demographics.new(Param.first.app_key,image_path,"url")
@@ -66,15 +74,21 @@ def match_no_scores
 end
 
 #returns sorted array of users objects with commonality scores who were matched
-  def matches_only
-    match.select{|user| user[1] > 0 }
-  end
-
-  def matches_only_no_score
-    matches_only.map{|user| user[0]}
-  end
+def matches_only
+    demo_matches(match.select{|user| user[1] > 0 })
 end
 
+def matches_only_no_score
+    demo_matches(matches_only.map{|user| user[0]})
+end
+
+def demo_matches(array)
+    matches = array.select do |match|
+    self.cel_demo.split(",").includes? match.demo.split(",")[1]
+    end
+  end
+
+end
 # has_many :follower_relationships, foreign_key: :following_id, class_name: 'Follow'
 # has_many :followers, through: :follower_relationships, source: :follower
 #

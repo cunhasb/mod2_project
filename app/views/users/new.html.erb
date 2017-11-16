@@ -1,14 +1,13 @@
-<h1 class= "display-1">Sign Up For a New Account </h1>
+<div class= "jumbotron"><h1>Sign Up For a New Account </h1></div>
 <br>
   <%= form_for @user, url: { action: "create" } do |f| %>
-  <%= f.label :name %>
+  <%= f.label :name %>:
   <%= f.text_field :name %>
-  <%= f.label :password %>
+  <%= f.label :password %>:
   <%= f.text_field :password %>
-  <p><br>
-  <%= f.label :picture %>
+
+  <%= f.label :picture %>:
   <%= f.file_field :avatar %>
-  <%= f.submit %>
 
 
 
@@ -70,6 +69,7 @@
       <input id= "preferences_chris" name= "preference_check4" type = "radio" value= "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Chris_Pratt_by_Gage_Skidmore_2.jpg/1200px-Chris_Pratt_by_Gage_Skidmore_2.jpg"/>
         <img style="max-height: 250px; border-radius: 8px;"src= "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Chris_Pratt_by_Gage_Skidmore_2.jpg/1200px-Chris_Pratt_by_Gage_Skidmore_2.jpg" alt= "Chris Pratt"></label>
         <p><br>
+          <div class="submit" style="float: right; margin-right: 100px"><%= f.submit %></div>
         <!-- <form action="upload.php" method="post" enctype="multipart/form-data">
           Don't see your crush? Upload your own picture of your celeb crush:
         <p><br>
