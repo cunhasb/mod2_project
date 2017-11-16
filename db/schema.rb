@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171115152449) do
+ActiveRecord::Schema.define(version: 20171116211747) do
 
   create_table "labels", force: :cascade do |t|
     t.string "name"
@@ -62,6 +62,8 @@ ActiveRecord::Schema.define(version: 20171115152449) do
     t.string "age_appearance"
     t.string "gender_appearance"
     t.string "multicultural_appearance"
+    t.string "demo"
+    t.string "cel_demo"
   end
 
 end

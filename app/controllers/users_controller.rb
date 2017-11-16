@@ -13,12 +13,11 @@ class UsersController < ApplicationController
       flash[:notice] = "🍧 successful sign up!"
       Profile.create(user_id: current_user.id)
       Preference.create(user_id: current_user.id)
-      current_user.add_profile
+      current_user.add_profile(current_user.avatar.path)
       current_user.add_preference(params[:preference_check1])
       current_user.add_preference(params[:preference_check2])
       current_user.add_preference(params[:preference_check3])
-      current_user.add_preference(params[:preference_check4])
-      byebug
+      current_user.add_celebrity(params[:preference_check4])
       redirect_to users_path
     else
       flash[:notice] = "🦉 Not a valid user!!"
