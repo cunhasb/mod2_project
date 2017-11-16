@@ -8,7 +8,6 @@ class Concepts
     else
       @request = Clarifai.new(app_key,"general",image_url).body
     end
-
   end
 
   def concepts

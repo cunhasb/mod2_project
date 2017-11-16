@@ -9,6 +9,7 @@ class Demographics
       @request = Clarifai.new(app_key,"demographics",image_url).body
     end
   end
+
   def demographics
     @request.values[1][0]["data"].values[0][0]["data"].values[0]
   end

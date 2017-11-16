@@ -7,6 +7,7 @@ class Clarifai
   # attr_reader :g_uri, :request
 
   def initialize(app_key, model, image_path)
+
     @app_key = app_key
     @model = model
     @image_path = image_path
@@ -67,10 +68,12 @@ def response
 end
 
 def body
+
   JSON.parse(self.request.body)
 end
 
 def body_byte
+
   JSON.parse(self.request_byte.body)
 end
 
@@ -81,8 +84,7 @@ def request_byte
 
   request.content_type = "application/json"
   request["Authorization"] = "Key #{self.app_key}"
-
-  encoded_file = Base64.encode64(File.open("/Users/cunha/development/mod2_project/public/images/Dick_right_Size.jpg", "rb").read)
+  encoded_file = Base64.encode64(File.open(image_path, "rb").read)
 
   body = {
     inputs: [
