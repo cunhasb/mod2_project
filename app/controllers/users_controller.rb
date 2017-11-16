@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   def index
-    @users = User.all
+    @users = current_user.matches_only_no_score
   end
 
   def create
@@ -85,16 +85,6 @@ class UsersController < ApplicationController
     redirect_to user_path(current_user)
     end
 
-  def match(user)
-    User.all.each_with_object(matches= {}) do |user|
-      if current_user != user
-        byebug
-        common = current_user.preference_labels_with_names & user.profile_labels_with_names
-        matches[user]=common.count
-      end
-    end
-
-  end
 
 
 
