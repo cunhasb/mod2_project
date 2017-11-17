@@ -59,7 +59,7 @@ dick.preference.labels << bicycle
 dick.preference.labels << water
 dick.preference.labels << car
 
-Param.create(app_key: "f40ee57ffed14e4a8ff5f7d165a34be8",filters:"age,gender,multicultural")
+Param.create(app_key: "f40ee57ffed14e4a8ff5f7d165a34be8",filters:"gender,multicultural")
 
 
 
