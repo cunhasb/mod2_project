@@ -89,22 +89,39 @@ end
 #returns sorted array of users objects with commonality scores who were matched
 
 def matches_only
-    demo_matches(match.select{|user| user[1] > 0 })
+  match ? filter(match.select{|user| user[1] > 0 },Param.first.filters) : matches = []
 end
 
 def matches_only_no_score
-    demo_matches(matches_only.map{|user| user[0]})
+  matches_only ? filter(match.map{|user| user[0]},Param.first.filters) : matches = []
 end
 
-def demo_matches(array)
-    matches = array.select do |match|
-      if match.class == Array
-        self.cel_demo.split(",").include? match.first.demo.split(",")[1]
-      else
-        self.cel_demo.split(",").include? match.demo.split(",")[1]
+# runs filters on match list
+# filters_array, contain filters to run in order
+def filter(array,filters_array=[])
+  matches=array
+  if !filters_array.empty?
+    f_array=filters_array.split(",")
+    f_array.each do |filter|
+      case filter
+      when "age"
+        match_position = 0
+      when "gender"
+        match_position = 1
+      when "multicultural"
+        match_position = 2
+      end
+      matches = matches.select do |match|
+        if match.class == Array
+          self.cel_demo.split(",").include? match.first.demo.split(",")[match_position]
+        else
+          self.cel_demo.split(",").include? match.demo.split(",")[match_position]
+        end
       end
     end
   end
+  matches
+end
 
 end
 # has_many :follower_relationships, foreign_key: :following_id, class_name: 'Follow'

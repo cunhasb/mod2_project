@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171116211747) do
+ActiveRecord::Schema.define(version: 20171117014214) do
 
   create_table "labels", force: :cascade do |t|
     t.string "name"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20171116211747) do
     t.string "app_key"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "filters"
   end
 
   create_table "preference_labels", force: :cascade do |t|
