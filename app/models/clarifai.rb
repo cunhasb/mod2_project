@@ -84,10 +84,6 @@ def request_byte
 
   request.content_type = "application/json"
   request["Authorization"] = "Key #{self.app_key}"
-<<<<<<< HEAD
-
-=======
->>>>>>> 3e18ba144483d80d990e4c115f1308f4296dea45
   encoded_file = Base64.encode64(File.open(image_path, "rb").read)
 
   body = {

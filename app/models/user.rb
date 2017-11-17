@@ -41,13 +41,20 @@ class User < ApplicationRecord
           self.demo = label.name
         end
       end
+      self.save
       pref= Concepts.new(Param.first.app_key,image_path,"byte")
       pref.labels[0...5].each{|label|self.profile.labels << Label.create(name: label)}
     end
 
   def add_celebrity(image_path="https://www.gannett-cdn.com/-mm-/9ca0093dea60cacd58a897ab56282e0c75635558/c=172-0-2828-1997&r=x513&c=680x510/local/-/media/2017/07/28/USATODAY/USATODAY/636368386172605527-AFP-AFP-QE0OJ.jpg")
     demo= Demographics.new(Param.first.app_key,image_path,"url")
-    demo.demographics.keys.each{|x|self.preference.labels << Label.create(name: demo.demographics[x]["concepts"].first["name"])}
+    demo.demographics.keys.each do |x|
+      label = Label.create(name: demo.demographics[x]["concepts"].first["name"])
+      self.preference.labels << label
+      self.cel_demo ? self.cel_demo = self.cel_demo << "," << label.name : self.cel_demo = label.name
+      end
+      self.save
+
   end
 
   def preference_labels_with_names
@@ -85,7 +92,11 @@ end
 
 def demo_matches(array)
     matches = array.select do |match|
-    self.cel_demo.split(",").includes? match.demo.split(",")[1]
+      if match.class == Array
+        self.cel_demo.split(",").include? match.first.demo.split(",")[1]
+      else
+        self.cel_demo.split(",").include? match.demo.split(",")[1]
+      end
     end
   end
 
