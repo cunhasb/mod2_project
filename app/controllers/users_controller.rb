@@ -6,6 +6,10 @@ class UsersController < ApplicationController
   def create
 
     @user = User.new(user_params)
+    if @user && params[:preference_check1] && params[:preference_check2] && params[:preference_check3] && params[:preference_check4]
+      @user.cel_demo || @user.cel_demo = "blank"
+      @user.demo || @user.demo = "blank"
+    end
 
 
     if @user.save
@@ -13,6 +17,8 @@ class UsersController < ApplicationController
       flash[:notice] = "🍧 successful sign up!"
       Profile.create(user_id: current_user.id)
       Preference.create(user_id: current_user.id)
+      @user.demo == "blank" ? @user.demo = "" : nil
+      @user.cel_demo == "blank" ? @user.cel_demo = "" : nil
       current_user.add_profile(current_user.avatar.path)
       current_user.add_preference(params[:preference_check1])
       current_user.add_preference(params[:preference_check2])
@@ -20,7 +26,7 @@ class UsersController < ApplicationController
       current_user.add_celebrity(params[:preference_check4])
       redirect_to users_path
     else
-      flash[:notice] = "🦉 Not a valid user!!"
+      flash[:notice] = "🦉 Sorry Not a valid user, or we could not build your profile!!"
       render :new
     end
   end
@@ -75,7 +81,7 @@ class UsersController < ApplicationController
 
   def destroy
     current_user.destroy
-    redirect_to users_path
+    redirect_to '/'
   end
 
   def like_user

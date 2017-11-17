@@ -9,6 +9,11 @@ class User < ApplicationRecord
 
   has_one :preference
   has_one :profile
+  validates :name, presence: true
+  validates :password_digest, presence: true
+  validates :demo, presence: true
+  validates :cel_demo, presence: true
+  validates :avatar, presence: true
 
   has_secure_password
 
@@ -27,14 +32,21 @@ class User < ApplicationRecord
 
   def add_preference(image_path="http://www.exmooradventures.co.uk/wp-content/uploads/2013/01/DSCN59891.jpg",elements=5)
     pref= Concepts.new(Param.first.app_key,image_path,"url")
-    pref.labels[0...elements].each{|label|self.preference.labels << Label.create(name: label)}
+    matches=[]
+    user_labels = self.profile.labels
+    pref.labels[0...elements].each do |label|
+       matches << Label.create(name: label)
+     end
+     self.preference.labels << matches
   end
 
   def add_profile(image_path="https://www.gannett-cdn.com/-mm-/9ca0093dea60cacd58a897ab56282e0c75635558/c=172-0-2828-1997&r=x513&c=680x510/local/-/media/2017/07/28/USATODAY/USATODAY/636368386172605527-AFP-AFP-QE0OJ.jpg")
       demo= Demographics.new(Param.first.app_key,image_path,"byte")
+      matches=[]
+      user_labels = self.profile.labels
       demo.demographics.keys.each do |x|
         label = Label.create(name: demo.demographics[x]["concepts"].first["name"])
-        self.profile.labels << label
+        !user_labels.include?(label) ? matches << label : nil
         if self.demo
         self.demo = self.demo << "," << label.name
         else
@@ -43,18 +55,24 @@ class User < ApplicationRecord
       end
       self.save
       pref= Concepts.new(Param.first.app_key,image_path,"byte")
-      pref.labels[0...5].each{|label|self.profile.labels << Label.create(name: label)}
+      pref.labels[0...5].each do |label|
+        !user_labels.include?(label) ? matches << Label.create(name: label) : nil
+      end
+         self.profile.labels << matches
     end
 
   def add_celebrity(image_path="https://www.gannett-cdn.com/-mm-/9ca0093dea60cacd58a897ab56282e0c75635558/c=172-0-2828-1997&r=x513&c=680x510/local/-/media/2017/07/28/USATODAY/USATODAY/636368386172605527-AFP-AFP-QE0OJ.jpg")
     demo= Demographics.new(Param.first.app_key,image_path,"url")
+    matches = []
+    self.cel_demo || ""
+    user_labels = self.preference.labels
     demo.demographics.keys.each do |x|
       label = Label.create(name: demo.demographics[x]["concepts"].first["name"])
-      self.preference.labels << label
-      self.cel_demo ? self.cel_demo = self.cel_demo << "," << label.name : self.cel_demo = label.name
+      !user_labels.include?(label) ? matches << label : nil
+      !self.cel_demo == "" ? self.cel_demo = self.cel_demo << "," << label.name : self.cel_demo = label.name
       end
       self.save
-
+      self.preference.labels << matches
   end
 
   def preference_labels_with_names

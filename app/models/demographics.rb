@@ -11,7 +11,7 @@ class Demographics
   end
 
   def demographics
-    @request.values[1][0]["data"].values[0][0]["data"].values[0]
+    @request.values[1][0]["data"].values[0] ? @request.values[1][0]["data"].values[0][0]["data"].values[0] : {}
   end
 
   def age
