@@ -47,7 +47,7 @@ class User < ApplicationRecord
       demo.demographics.keys.each do |x|
         label = Label.create(name: demo.demographics[x]["concepts"].first["name"])
         !user_labels.include?(label) ? matches << label : nil
-        if self.demo
+        if self.demo == ""
         self.demo = self.demo << "," << label.name
         else
           self.demo = label.name
@@ -64,12 +64,11 @@ class User < ApplicationRecord
   def add_celebrity(image_path="https://www.gannett-cdn.com/-mm-/9ca0093dea60cacd58a897ab56282e0c75635558/c=172-0-2828-1997&r=x513&c=680x510/local/-/media/2017/07/28/USATODAY/USATODAY/636368386172605527-AFP-AFP-QE0OJ.jpg")
     demo= Demographics.new(Param.first.app_key,image_path,"url")
     matches = []
-    self.cel_demo || ""
     user_labels = self.preference.labels
     demo.demographics.keys.each do |x|
       label = Label.create(name: demo.demographics[x]["concepts"].first["name"])
       !user_labels.include?(label) ? matches << label : nil
-      !self.cel_demo == "" ? self.cel_demo = self.cel_demo << "," << label.name : self.cel_demo = label.name
+      self.cel_demo != "blank" ? self.cel_demo = self.cel_demo << "," << label.name : self.cel_demo = label.name
       end
       self.save
       self.preference.labels << matches
