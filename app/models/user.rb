@@ -100,7 +100,7 @@ end
 # filters_array, contain filters to run in order
 def filter(array,filters_array=[])
   matches=array
-  if !filters_array.empty?
+  if !!filters_array
     f_array=filters_array.split(",")
     f_array.each do |filter|
       case filter
