@@ -47,7 +47,8 @@ class User < ApplicationRecord
       demo.demographics.keys.each do |x|
         label = Label.create(name: demo.demographics[x]["concepts"].first["name"])
         !user_labels.include?(label) ? matches << label : nil
-        if self.demo == ""
+        # byebug
+        if self.demo != "blank"
         self.demo = self.demo << "," << label.name
         else
           self.demo = label.name
@@ -117,7 +118,7 @@ end
 # filters_array, contain filters to run in order
 def filter(array,filters_array=[])
   matches=array
-  if !!filters_array
+  if filters_array
     f_array=filters_array.split(",")
     f_array.each do |filter|
       case filter
@@ -128,11 +129,11 @@ def filter(array,filters_array=[])
       when "multicultural"
         match_position = 2
       end
-      matches = matches.select do |match|
-        if match.class == Array
-          self.cel_demo.split(",").include? match.first.demo.split(",")[match_position]
+      matches = matches.select do |x|
+        if x.class == Array
+          self.cel_demo.split(",").include? x.first.demo.split(",")[match_position]
         else
-          self.cel_demo.split(",").include? match.demo.split(",")[match_position]
+          self.cel_demo.split(",").include? x.demo.split(",")[match_position]
         end
       end
     end
