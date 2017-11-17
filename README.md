@@ -1,24 +1,23 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Welcome to Peeker! We are out to solve the age old problem of lying to potential significant others. We use Clarifai technology to analyze photos to interpret who users really are and match them with other users.
 
-Things you may want to cover:
+Users are able to:
++ upload pictures
++ select from a list of preferences (represented as photos)
++ like other users
++ get matched!
 
-* Ruby version
+To learn more about Clarifai: https://www.clarifai.com/
 
-* System dependencies
+## Setup
 
-* Configuration
+Before you begin, fork and clone this repo, run `bundle install` and `rake db:migrate` to get started.
 
-* Database creation
 
-* Database initialization
+##What you need to use Peeker:
 
-* How to run the test suite
+* System dependencies: You will need to upload local photos that will be analyzed to perform the matching magic.  
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Database creation- for testing purposes, we have included some seed data!
+run `rake db:seed`.

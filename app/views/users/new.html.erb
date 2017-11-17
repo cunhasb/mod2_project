@@ -1,82 +1,96 @@
 <div class= "jumbotron"><h1>Sign Up For a New Account </h1></div>
-<br>
-  <%= form_for @user, url: { action: "create" } do |f| %>
+<br/>
+<%= form_for @user, url: { action: "create" } do |f| %>
   <%= f.label :name %>:
   <%= f.text_field :name %>
   <%= f.label :password %>:
   <%= f.text_field :password %>
-
+  <br/>
   <%= f.label :picture %>:
   <%= f.file_field :avatar %>
-
-
-
-  <h2> We Want to Learn More about You </h2>
-  <p> Please select one of the following options for each question</p>
-  <p><br>
+  <h2>We Want to Learn More about You</h2>
+  <p>Please select one of the following options for each question</p>
+  <br/>
   <%= f.label "on my weekend:" %>
   <label for="preferences_swimming">
-    <input id="preferences_swimming" name="preference_check1" type="radio" value="https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-9/18700140_10154942083293071_8370634500906125912_n.jpg?oh=d244bfcd552f86e4870bab300ddf9f66&oe=5A9983CF">
-     <img style="max-height: 250px; border-radius: 8px;"src="https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-9/18700140_10154942083293071_8370634500906125912_n.jpg?oh=d244bfcd552f86e4870bab300ddf9f66&oe=5A9983CF" alt= "I like to Go Wild!!!!"></label>
-
+    <input id="preferences_swimming" name="preference_check1" type="radio" value="https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-9/18700140_10154942083293071_8370634500906125912_n.jpg?oh=d244bfcd552f86e4870bab300ddf9f66&oe=5A9983CF"/>
+    <img style="max-height: 250px; border-radius: 8px;" src="https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-9/18700140_10154942083293071_8370634500906125912_n.jpg?oh=d244bfcd552f86e4870bab300ddf9f66&oe=5A9983CF" alt="I like to Go Wild!!!!"/>
+  </label>
   <label for="preferences_relaxing">
-    <input id="preferences_relaxing" name="preference_check1" type="radio" value="http://s3.amazonaws.com/zacflix/uploads/monk.jpg" />
-      <img style="max-height: 250px; border-radius: 8px;"src= http://s3.amazonaws.com/zacflix/uploads/monk.jpg alt= "I like to chill"</label>
-  <p><br>
-
+    <input
+      id="preferences_relaxing"
+      name="preference_check1"
+      type="radio"
+      value="http://s3.amazonaws.com/zacflix/uploads/monk.jpg"
+    />
+    <img style="max-height: 250px; border-radius: 8px;" src="http://s3.amazonaws.com/zacflix/uploads/monk.jpg" alt="I like to chill"/>
+  </label>
+  <br/>
   <%= f.label "I would prefer to eat:" %>
-    <label for="preferences_sushi">
-      <input id="preferences_sushi" name="preference_check2" type="radio" value="https://img.grouponcdn.com/deal/hfefAup1zQWBE2K8sWURgS27xax/hf-846x508/v1/c700x420.jpg">
-        <img style="max-height: 250px; border-radius: 8px;"src= "https://img.grouponcdn.com/deal/hfefAup1zQWBE2K8sWURgS27xax/hf-846x508/v1/c700x420.jpg" alt = "sushi"></label>
-    <label for="preferences_pizza">
-      <input id="preferences_pizza" name="preference_check2" type="radio" value="https://pantograph0.goldbely.com/uploads/product_image/image/11711/authentic-new-york-pizza.089cd28a335e19c3e282c99dc41622ed.jpg" />
-        <img style="max-height: 250px; border-radius: 8px;"src="https://pantograph0.goldbely.com/uploads/product_image/image/11711/authentic-new-york-pizza.089cd28a335e19c3e282c99dc41622ed.jpg" alt= "Pizza"></label>
-    <p><br>
-    <%= f.label "Drink of Choice:" %>
-    <label for="preferences_cosmo">
-      <input id="preferences_cosmo" name="preference_check3" type="radio" value="https://cdn.liquor.com/wp-content/uploads/2010/05/03124724/the-cosmo.jpg">
-        <img style="max-height: 250px; border-radius: 8px;"src= "https://cdn.liquor.com/wp-content/uploads/2010/05/03124724/the-cosmo.jpg" alt= "cosmo"></label>
-    <label for="preferences_rum">
-      <input id="preferences_rum" name="preference_check3" type="radio" value="https://assets3.thrillist.com/v1/image/1707949/size/tmg-article_default_mobile.jpg" />
-      <img style="max-height: 250px; border-radius: 8px;"src= "https://assets3.thrillist.com/v1/image/1707949/size/tmg-article_default_mobile.jpg" alt = "rum"></label>
-    <label for="preferences_water"><br>
-      <input id="preferences_water" name="preference_check3" type="radio" value="https://media1.britannica.com/eb-media/02/157502-131-7C5D3A67.jpg" />
-        <img style="max-height: 250px; border-radius: 8px;"src= "https://media1.britannica.com/eb-media/02/157502-131-7C5D3A67.jpg" alt= "water"></label>
-        <p><br>
-        <%= f.label "Celeb Crush"%>
-    <label for="preferences_byonce">
-      <input id= "preferences_byonce" name= "preference_check4" type = "radio" value= "http://s3.amazonaws.com/hiphopdx-production/2017/02/Beyonce-by-Mike-Lavin-@thehomelesspimp-3-800x600.jpg"/>
-      <img style="max-height: 250px; border-radius: 8px;"src= "http://s3.amazonaws.com/hiphopdx-production/2017/02/Beyonce-by-Mike-Lavin-@thehomelesspimp-3-800x600.jpg" alt= "byonce"></label>
+  <label for="preferences_sushi">
+    <input id="preferences_sushi" name="preference_check2" type="radio" value="https://img.grouponcdn.com/deal/hfefAup1zQWBE2K8sWURgS27xax/hf-846x508/v1/c700x420.jpg"/>
+    <img style="max-height: 250px; border-radius: 8px;" src="https://img.grouponcdn.com/deal/hfefAup1zQWBE2K8sWURgS27xax/hf-846x508/v1/c700x420.jpg" alt="sushi"/>
+  </label>
 
-    <label for="preferences_katyp">
-      <input id= "preferences_katyp" name= "preference_check4" type = "radio" value= "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_pLR-hantf1-mWamPI75aSP7kLAzcBjc2cCRmKXi7y4vSDWByHQ"/>
-        <img style="max-height: 250px; border-radius: 8px;"src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_pLR-hantf1-mWamPI75aSP7kLAzcBjc2cCRmKXi7y4vSDWByHQ" alt= "Katy Perry"></label>
+  <label for="preferences_pizza">
+    <input id="preferences_pizza" name="preference_check2" type="radio" value="https://pantograph0.goldbely.com/uploads/product_image/image/11711/authentic-new-york-pizza.089cd28a335e19c3e282c99dc41622ed.jpg"/>
+    <img style="max-height: 250px; border-radius: 8px;" src="https://pantograph0.goldbely.com/uploads/product_image/image/11711/authentic-new-york-pizza.089cd28a335e19c3e282c99dc41622ed.jpg" alt="Pizza"/>
+  </label>
+  <br/>
 
-    <label for="preferences_tswift">
-      <input id= "preferences_tswift" name= "preference_check4" type = "radio" value= "https://i.ytimg.com/vi/AgFeZr5ptV8/maxresdefault.jpg"/>
-        <img style="max-height: 250px; border-radius: 8px;"src= "https://i.ytimg.com/vi/AgFeZr5ptV8/maxresdefault.jpg" alt= "Taylor Swift"></label>
+  <%= f.label "Drink of Choice:" %>
+  <label for="preferences_cosmo">
+    <input id="preferences_cosmo" name="preference_check3" type="radio" value="https://cdn.liquor.com/wp-content/uploads/2010/05/03124724/the-cosmo.jpg"/>
+    <img style="max-height: 250px; border-radius: 8px;" src="https://cdn.liquor.com/wp-content/uploads/2010/05/03124724/the-cosmo.jpg" alt="cosmo"/>
+  </label>
 
+  <label for="preferences_rum">
+    <input id="preferences_rum" name="preference_check3" type="radio" value="https://assets3.thrillist.com/v1/image/1707949/size/tmg-article_default_mobile.jpg"/>
+    <img style="max-height: 250px; border-radius: 8px;" src="https://assets3.thrillist.com/v1/image/1707949/size/tmg-article_default_mobile.jpg" alt="rum"/>
+  </label>
 
-    <label for="preferences_ryan">
-      <input id= "preferences_ryan" name= "preference_check4" type = "radio" value= "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Ryan_Gosling_2_Cannes_2011_%28cropped%29.jpg/220px-Ryan_Gosling_2_Cannes_2011_%28cropped%29.jpg"/>
-        <img style="max-height: 250px; border-radius: 8px;"src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Ryan_Gosling_2_Cannes_2011_%28cropped%29.jpg/220px-Ryan_Gosling_2_Cannes_2011_%28cropped%29.jpg" alt="Ryan Gosling"></label>
+  <label for="preferences_water">
+    <br/>
+    <input id="preferences_water" name="preference_check3" type="radio" value="https://media1.britannica.com/eb-media/02/157502-131-7C5D3A67.jpg"/>
+    <img style="max-height: 250px; border-radius: 8px;" src="https://media1.britannica.com/eb-media/02/157502-131-7C5D3A67.jpg" alt="water"/>
+  </label>
+  <br>
+  <%= f.label "Celeb Crush" %>
+  <label for="preferences_byonce">
+    <input id="preferences_byonce" name="preference_check4" type="radio" value= "http://s3.amazonaws.com/hiphopdx-production/2017/02/Beyonce-by-Mike-Lavin-@thehomelesspimp-3-800x600.jpg"/>
+    <img style="max-height: 250px; border-radius: 8px;" src="http://s3.amazonaws.com/hiphopdx-production/2017/02/Beyonce-by-Mike-Lavin-@thehomelesspimp-3-800x600.jpg" alt="Beyonce"/>
+  </label>
 
-    <label for="preferences_channing">
-      <input id= "preferences_channing" name= "preference_check4" type = "radio" value= "https://pbs.twimg.com/profile_images/674498990214279168/2Vle-yah.jpg"/>
-        <img style="max-height: 250px; border-radius: 8px;"src= "https://pbs.twimg.com/profile_images/674498990214279168/2Vle-yah.jpg" alt= "Channing Tatum"></label>
+  <label for="preferences_katyp">
+    <input id="preferences_katyp" name="preference_check4" type="radio" value="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_pLR-hantf1-mWamPI75aSP7kLAzcBjc2cCRmKXi7y4vSDWByHQ"/>
+    <img style="max-height: 250px; border-radius: 8px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_pLR-hantf1-mWamPI75aSP7kLAzcBjc2cCRmKXi7y4vSDWByHQ" alt="Katy Perry">
+  </label>
 
-    <label for="preferences_chris">
-      <input id= "preferences_chris" name= "preference_check4" type = "radio" value= "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Chris_Pratt_by_Gage_Skidmore_2.jpg/1200px-Chris_Pratt_by_Gage_Skidmore_2.jpg"/>
-        <img style="max-height: 250px; border-radius: 8px;"src= "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Chris_Pratt_by_Gage_Skidmore_2.jpg/1200px-Chris_Pratt_by_Gage_Skidmore_2.jpg" alt= "Chris Pratt"></label>
-        <p><br>
-          <div class="submit" style="float: right; margin-right: 100px"><%= f.submit %></div>
-        <!-- <form action="upload.php" method="post" enctype="multipart/form-data">
-          Don't see your crush? Upload your own picture of your celeb crush:
-        <p><br>
-      <input type="file" name="celeb_fileToUpload" id="fileToUpload">
-    </form> -->
+  <label for="preferences_tswift">
+    <input id="preferences_tswift" name="preference_check4" type="radio" value="https://i.ytimg.com/vi/AgFeZr5ptV8/maxresdefault.jpg"/>
+    <img style="max-height: 250px; border-radius: 8px;" src="https://i.ytimg.com/vi/AgFeZr5ptV8/maxresdefault.jpg" alt="Taylor Swift"/>
+  </label>
 
-  <br></br>
+  <label for="preferences_ryan">
+    <input id= "preferences_ryan" name= "preference_check4" type="radio" value="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Ryan_Gosling_2_Cannes_2011_%28cropped%29.jpg/220px-Ryan_Gosling_2_Cannes_2011_%28cropped%29.jpg"/>
+    <img style="max-height: 250px; border-radius: 8px;"src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Ryan_Gosling_2_Cannes_2011_%28cropped%29.jpg/220px-Ryan_Gosling_2_Cannes_2011_%28cropped%29.jpg" alt="Ryan Gosling"/>
+  </label>
+
+  <label for="preferences_channing">
+    <input id= "preferences_channing" name= "preference_check4" type = "radio" value= "https://pbs.twimg.com/profile_images/674498990214279168/2Vle-yah.jpg"/>
+    <img style="max-height: 250px; border-radius: 8px;" src="https://pbs.twimg.com/profile_images/674498990214279168/2Vle-yah.jpg" alt= "Channing Tatum"/>
+  </label>
+
+  <label for="preferences_chris">
+    <input id= "preferences_chris" name= "preference_check4" type = "radio" value= "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Chris_Pratt_by_Gage_Skidmore_2.jpg/1200px-Chris_Pratt_by_Gage_Skidmore_2.jpg"/>
+    <img style="max-height: 250px; border-radius: 8px;"src= "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Chris_Pratt_by_Gage_Skidmore_2.jpg/1200px-Chris_Pratt_by_Gage_Skidmore_2.jpg" alt= "Chris Pratt"/>
+  </label>
+  <br/>
+  <!-- <p>Don't see your crush? Upload your own picture of your celeb crush:</p>
+  <br/>
+  <input type="file" name="celeb_fileToUpload" id="fileToUpload"/>
+  <br/> -->
+  <div class="submit" style="float: right; margin-right: 100px"><%= f.submit %></div>
 <% end %>
 
   <!-- <h1> Show Us More About Yourself!</h1>

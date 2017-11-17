@@ -18,6 +18,7 @@ class UsersController < ApplicationController
       current_user.add_preference(params[:preference_check2])
       current_user.add_preference(params[:preference_check3])
       current_user.add_celebrity(params[:preference_check4])
+
       redirect_to users_path
     else
       flash[:notice] = "🦉 Not a valid user!!"
@@ -31,7 +32,6 @@ class UsersController < ApplicationController
 
   # move to likes_controller?
   def like
-
     current_user.add_like(params[:user])
     redirect_to user_path(current_user)
   end
