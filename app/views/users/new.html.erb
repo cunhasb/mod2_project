@@ -1,16 +1,15 @@
-<div class= "jumbotron"><h1>Sign Up For a New Account </h1></div>
-<br>
+<div class= "jumbotron text-center" style="height: 220px"><h1>Sign Up For a New Account </h1></div>
+
   <%= form_for @user, url: { action: "create" } do |f| %>
-  <%= f.label :name %>:
-  <%= f.text_field :name %>
-  <%= f.label :password %>:
-  <%= f.text_field :password %>
-
-  <%= f.label :picture %>:
-  <%= f.file_field :avatar %>
-
+  <label style="color:#e3e2df">Name:
+  <%= f.text_field :name %></label>
+  <label style="color:#e3e2df">Password:
+  <%= f.text_field :password %></label>
+  <label style="color:#e3e2df">Picture:
+  <%= f.file_field :avatar %></label>
 
 
+<div style="color:#e3e2df">
   <h2> We Want to Learn More about You </h2>
   <p> Please select one of the following options for each question</p>
   <p><br>
@@ -75,9 +74,10 @@
         <p><br>
       <input type="file" name="celeb_fileToUpload" id="fileToUpload">
     </form> -->
-
   <br></br>
+</div>
 <% end %>
+
 
   <!-- <h1> Show Us More About Yourself!</h1>
 
