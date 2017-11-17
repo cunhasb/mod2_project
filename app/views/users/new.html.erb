@@ -1,16 +1,18 @@
-<div class= "jumbotron"><h1>Sign Up For a New Account </h1></div>
-<br/>
-<%= form_for @user, url: { action: "create" } do |f| %>
-  <%= f.label :name %>:
-  <%= f.text_field :name %>
-  <%= f.label :password %>:
-  <%= f.text_field :password %>
-  <br/>
-  <%= f.label :picture %>:
-  <%= f.file_field :avatar %>
-  <h2>We Want to Learn More about You</h2>
-  <p>Please select one of the following options for each question</p>
-  <br/>
+<div class= "jumbotron text-center" style="height: 220px"><h1>Sign Up For a New Account </h1></div>
+
+  <%= form_for @user, url: { action: "create" } do |f| %>
+  <label style="color:#e3e2df">Name:
+  <%= f.text_field :name %></label>
+  <label style="color:#e3e2df">Password:
+  <%= f.text_field :password %></label>
+  <label style="color:#e3e2df">Picture:
+  <%= f.file_field :avatar %></label>
+
+
+<div style="color:#e3e2df">
+  <h2> We Want to Learn More about You </h2>
+  <p> Please select one of the following options for each question</p>
+  <p><br>
   <%= f.label "on my weekend:" %>
   <label for="preferences_party">
     <input id="preferences_party" name="preference_check1" type="radio" value="http://themocracy.com/wp-content/uploads/2016/12/Parties.jpg"/>
@@ -92,6 +94,7 @@
   <br/> -->
   <div class="submit" style="float: right; margin-right: 100px"><%= f.submit %></div>
 <% end %>
+
 
   <!-- <h1> Show Us More About Yourself!</h1>
 

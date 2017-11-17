@@ -15,6 +15,6 @@ class Concepts
   end
 
   def labels
-    self.concepts.map{|label|label["name"]}
+    self.concepts ? self.concepts.map{|label|label["name"]} : []
   end
 end
