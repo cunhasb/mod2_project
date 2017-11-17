@@ -18,13 +18,13 @@ class User < ApplicationRecord
   has_secure_password
 
   def add_like(other_user_id)
-
     other_user = User.find(other_user_id)
     self.likees << other_user
   end
 
   def unlike(other_user_id)
-   self.likees.find(other_user_id).destroy
+   delete_me = Like.find_by(liker_id: self.id, likee_id: other_user_id)
+   delete_me.destroy
   end
 
   def log_in
@@ -86,12 +86,18 @@ class User < ApplicationRecord
 #returns a sorted array of users objects with commonality scores
   def match
     User.all.each_with_object(matches= {}) do |user|
-      if self != user
+      if self != user && match_already_liked?(user) == false
         common = self.preference_labels_with_names & user.profile_labels_with_names
         matches[user]=common.count
       end
     end.sort_by { |user, score| score }.reverse
   end
+
+#helper method that returns true if current user already likes a user
+def match_already_liked?(other_user_id)
+  self.likees.include?(other_user_id)
+end
+
 
 #removes commonality scores from array
 def match_no_scores
@@ -112,7 +118,7 @@ end
 # filters_array, contain filters to run in order
 def filter(array,filters_array=[])
   matches=array
-  if !filters_array.empty?
+  if !!filters_array
     f_array=filters_array.split(",")
     f_array.each do |filter|
       case filter
