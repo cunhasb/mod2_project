@@ -1,20 +1,83 @@
+<div class="jumbotron" style="height: 220px">
+<% if @user == current_user %>
+  <h1 class="text-center">Profile Page</h1>
+  <p class="lead text-muted text-center">Your profile and preferences were built out automatically thanks to an API call to Clarifai</p>
+</div>
 
-<h1>User Page for <%= @user.name %></h1>
-<br>
-<h3>People <%= @user.name %> likes:</h3>
-<% if @user.likees.count == 0 %>
-  No likes yet!
 <% else %>
-  <% @user.likees.each do |likee| %>
-  <p>- <%= link_to likee.name, user_path(likee) %></p>
-  <%end%>
+  <h1 class="text-center">User Page for <%= @user.name %>
+    <p class="lead text-muted text-center">Each user's profile and preferences were built out automatically thanks to an API call to Clarifai</p>
+    <% if !current_user.likees.include?(@user)%>
+    <%=form_for :like, url: "/like/#{@user.id}", method:"post" do |f| %>
+     <label>
+      <p class="btn" style="background-color: #CCDAD1"  >I like <%= @user.name %>!  <%= f.submit "Like", type: :image, src: "/images/SparklingHeart.png", width: "30"%></p>
+    </label>
+  </h1>
+      <% end %>
+    <% else %>
+    <%=form_for :like, url: "/unlike/#{@user.id}", method:"post" do |f| %>
+     <label>
+      <p class="btn btn-primary"  >I no longer like <%= @user.name %>!  <%= f.submit "Like", type: :image, src: "/images/SparklingHeart.png", width: "30"%></p>
+    </label>
+  </h1>
+      <% end %>
 <% end %>
+</div>
+<% end %>
+<div class="container">
+<div class="row">
+  <div class="col">
+    <div class="card">
+      <% if @user == current_user %>
+      <h3 class="card-header" style="background-color:#e3afbc">People you like:</h3>
+      <% else %>
+      <h3 class="card-header" style="background-color:#e3afbc">People <%= @user.name %> likes:</h3>
+      <% end %>
+      <% if @user.likees.count == 0 %>
+        <br>
+        <p>No likes yet!</p>
 
-<h3>People that like <%= @user.name %>:</h3>
-<% if @user.likers.count == 0 %>
-  No likes yet!
-<% else %>
-  <% @user.likers.each do |liker| %>
-  <p>- <%= link_to liker.name, user_path(liker) %></p>
-  <% end %>
-<%end%>
+
+      <% else %>
+        <% @user.likees.each do |likee| %>
+        <p>- <%= link_to likee.name, user_path(likee) %></p>
+        <%end%>
+      <% end %>
+
+      <br>
+      <br>
+      <% if @user == current_user %>
+        <h3 class="card-header" style="background-color:#e3afbc">People that like you!</h3>
+      <% else %>
+        <h3 class="card-header" style="background-color:#e3afbc">People that like <%= @user.name %>:</h3>
+      <% end %>
+      <% if @user.likers.count == 0 %>
+        <br>
+        <p>No likes yet!</p>
+
+      <% else %>
+      <div class="card-block">
+        <% @user.likers.each do |liker| %>
+        <p>- <%= link_to liker.name, user_path(liker) %></p>
+        <% end %>
+      </div>
+      <%end%>
+    </div>
+  </div>
+
+  <div class="col" style="color:#e3e2df">
+    <h5>Profile</h5>
+    <% @user.profile.labels.each do |label| %>
+    <p>- <%= label.name %></p>
+    <% end %>
+  </div>
+
+  <div class="col" style="color:#e3e2df">
+    <h5>Preferences</h5>
+    <% @user.preference.labels.each do |label| %>
+    <p>- <%= label.name %></p>
+    <% end %>
+  </div>
+
+</div>
+</div>

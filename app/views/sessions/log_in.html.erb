@@ -1,4 +1,3 @@
-<!-- change to sessions_path -->
 <%= form_for :user, url: '/log_in' do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>
@@ -6,5 +5,5 @@
   <%= f.label :password %>
   <%= f.text_field :password %>
 
-  <%= f.submit %>
+  <%= f.submit "Log In"%>
 <% end %>

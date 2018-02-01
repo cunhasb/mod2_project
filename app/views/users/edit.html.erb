@@ -5,17 +5,21 @@
   </ul>
     <% end %>
 <% end %>
-
+<div class = "jumbotron text-center" style="height: 220px">
 <h1>Update Page</h1>
-<%= link_to 'Delete Profile',  user_path, data: { confirm: 'Are you sure?' }, method: :delete %>
+<p class="lead text-muted text-center">Update your username, email and password. It's just about the only thing our API call and custom algorithm can't do for you!</p>
+
+</div>
 <%= form_for @user do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-  <%= f.label :email %>
-  <%= f.text_field :email %>
-  <%= f.label :password %>
-  <%= f.text_field :password %>
+  <label style="color:#e3e2df">Name:
+  <%= f.text_field :name %></label>
+  <label style="color:#e3e2df">Email:
+  <%= f.text_field :email %></label>
+  <label style="color:#e3e2df">Password:
+  <%= f.text_field :password %></label>
   <%#= f.label :confirm_password %>
   <%#= f.text_field :confirm_password %>
   <%= f.submit %>
   <% end %>
+  <div class="float-right" style="margin-right: 150px"><%= link_to 'Delete Profile',  user_path, data: { confirm: 'Are you sure?' }, method: :delete %>
+  </div>

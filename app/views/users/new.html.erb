@@ -1,9 +1,116 @@
-<h1> Sign In Page </h1>
+<div class= "jumbotron text-center" style="height: 220px"><h1>Sign Up For a New Account </h1></div>
 
-<%= form_for @user, url: { action: "create" } do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-  <%= f.label :password %>
-  <%= f.text_field :password %>
-  <%= f.submit %>
+  <%= form_for @user, url: { action: "create" } do |f| %>
+  <label style="color:#e3e2df">Name:
+  <%= f.text_field :name %></label>
+  <label style="color:#e3e2df">Password:
+  <%= f.text_field :password %></label>
+  <label style="color:#e3e2df">Picture:
+  <%= f.file_field :avatar %></label>
+
+
+<div style="color:#e3e2df">
+  <h2> We Want to Learn More about You </h2>
+  <p> Please select one of the following options for each question</p>
+  <p><br>
+  <%= f.label "on my weekend:" %>
+  <label for="preferences_party">
+    <input id="preferences_party" name="preference_check1" type="radio" value="http://themocracy.com/wp-content/uploads/2016/12/Parties.jpg"/>
+    <img style="max-height: 250px; border-radius: 8px;" src="http://themocracy.com/wp-content/uploads/2016/12/Parties.jpg" alt="I like to Go Wild!!!!"/>
+  </label>
+  <label for="preferences_relaxing">
+    <input
+      id="preferences_relaxing"
+      name="preference_check1"
+      type="radio"
+      value="https://i.ytimg.com/vi/Ps9cir33gB8/maxresdefault.jpg"
+    />
+    <img style="max-height: 250px; border-radius: 8px;" src="https://i.ytimg.com/vi/Ps9cir33gB8/maxresdefault.jpg" alt="I like to chill"/>
+  </label>
+  <br/>
+  <%= f.label "I would prefer to eat:" %>
+  <label for="preferences_sushi">
+    <input id="preferences_sushi" name="preference_check2" type="radio" value="https://img.grouponcdn.com/deal/hfefAup1zQWBE2K8sWURgS27xax/hf-846x508/v1/c700x420.jpg"/>
+    <img style="max-height: 250px; border-radius: 8px;" src="https://img.grouponcdn.com/deal/hfefAup1zQWBE2K8sWURgS27xax/hf-846x508/v1/c700x420.jpg" alt="sushi"/>
+  </label>
+
+  <label for="preferences_pizza">
+    <input id="preferences_pizza" name="preference_check2" type="radio" value="https://pantograph0.goldbely.com/uploads/product_image/image/11711/authentic-new-york-pizza.089cd28a335e19c3e282c99dc41622ed.jpg"/>
+    <img style="max-height: 250px; border-radius: 8px;" src="https://pantograph0.goldbely.com/uploads/product_image/image/11711/authentic-new-york-pizza.089cd28a335e19c3e282c99dc41622ed.jpg" alt="Pizza"/>
+  </label>
+  <br/>
+
+  <%= f.label "Drink of Choice:" %>
+  <label for="preferences_cosmo">
+    <input id="preferences_cosmo" name="preference_check3" type="radio" value="https://cdn.liquor.com/wp-content/uploads/2010/05/03124724/the-cosmo.jpg"/>
+    <img style="max-height: 250px; border-radius: 8px;" src="https://cdn.liquor.com/wp-content/uploads/2010/05/03124724/the-cosmo.jpg" alt="cosmo"/>
+  </label>
+
+  <label for="preferences_rum">
+    <input id="preferences_rum" name="preference_check3" type="radio" value="https://assets3.thrillist.com/v1/image/1707949/size/tmg-article_default_mobile.jpg"/>
+    <img style="max-height: 250px; border-radius: 8px;" src="https://assets3.thrillist.com/v1/image/1707949/size/tmg-article_default_mobile.jpg" alt="rum"/>
+  </label>
+
+  <label for="preferences_water">
+    <br/>
+    <input id="preferences_water" name="preference_check3" type="radio" value="http://drinkhealthydrinks.com/images/best-healthy-drinks.jpg"/>
+    <img style="max-height: 250px; border-radius: 8px;" src="http://drinkhealthydrinks.com/images/best-healthy-drinks.jpg" alt="not alcohol"/>
+  </label>
+  <br>
+  <%= f.label "Celeb Crush" %>
+  <label for="preferences_byonce">
+    <input id="preferences_byonce" name="preference_check4" type="radio" value= "http://s3.amazonaws.com/hiphopdx-production/2017/02/Beyonce-by-Mike-Lavin-@thehomelesspimp-3-800x600.jpg"/>
+    <img style="max-height: 250px; border-radius: 8px;" src="http://s3.amazonaws.com/hiphopdx-production/2017/02/Beyonce-by-Mike-Lavin-@thehomelesspimp-3-800x600.jpg" alt="Beyonce"/>
+  </label>
+
+  <label for="preferences_katyp">
+    <input id="preferences_katyp" name="preference_check4" type="radio" value="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_pLR-hantf1-mWamPI75aSP7kLAzcBjc2cCRmKXi7y4vSDWByHQ"/>
+    <img style="max-height: 250px; border-radius: 8px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_pLR-hantf1-mWamPI75aSP7kLAzcBjc2cCRmKXi7y4vSDWByHQ" alt="Katy Perry">
+  </label>
+
+  <label for="preferences_tswift">
+    <input id="preferences_tswift" name="preference_check4" type="radio" value="https://images-na.ssl-images-amazon.com/images/M/MV5BMTU2MzM3MTI3M15BMl5BanBnXkFtZTcwNDY5ODg1MQ@@._V1_UY317_CR4,0,214,317_AL_.jpg"/>
+    <img style="max-height: 250px; border-radius: 8px;" src="https://images-na.ssl-images-amazon.com/images/M/MV5BMTU2MzM3MTI3M15BMl5BanBnXkFtZTcwNDY5ODg1MQ@@._V1_UY317_CR4,0,214,317_AL_.jpg" alt="Chris Brown"/>
+  </label>
+
+  <label for="preferences_ryan">
+    <input id= "preferences_ryan" name= "preference_check4" type="radio" value="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Ryan_Gosling_2_Cannes_2011_%28cropped%29.jpg/220px-Ryan_Gosling_2_Cannes_2011_%28cropped%29.jpg"/>
+    <img style="max-height: 250px; border-radius: 8px;"src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Ryan_Gosling_2_Cannes_2011_%28cropped%29.jpg/220px-Ryan_Gosling_2_Cannes_2011_%28cropped%29.jpg" alt="Ryan Gosling"/>
+  </label>
+
+  <label for="preferences_channing">
+    <input id= "preferences_channing" name= "preference_check4" type = "radio" value= "https://pbs.twimg.com/profile_images/674498990214279168/2Vle-yah.jpg"/>
+    <img style="max-height: 250px; border-radius: 8px;" src="https://pbs.twimg.com/profile_images/674498990214279168/2Vle-yah.jpg" alt= "Channing Tatum"/>
+  </label>
+
+  <label for="preferences_chris">
+    <input id= "preferences_chris" name= "preference_check4" type = "radio" value= "https://media.glamour.com/photos/592dcb26d101351950d4111b/master/w_644,c_limit/wonder%2520woman.jpg"/>
+    <img style="max-height: 250px; border-radius: 8px;"src= "https://media.glamour.com/photos/592dcb26d101351950d4111b/master/w_644,c_limit/wonder%2520woman.jpg" alt= "Wonder Woman"/>
+  </label>
+  <br/>
+  <!-- <p>Don't see your crush? Upload your own picture of your celeb crush:</p>
+  <br/>
+  <input type="file" name="celeb_fileToUpload" id="fileToUpload"/>
+  <br/> -->
+  <div class="submit" style="float: right; margin-right: 100px"><%= f.submit %></div>
 <% end %>
+
+
+  <!-- <h1> Show Us More About Yourself!</h1>
+
+  <html>
+<body> -->
+
+
+<!-- <h2> Thing I like to Do Most on the Weekend: </h2>
+<img style="max-height: 250px; border-radius: 8px;"src="/images/18700140_10154942083293071_8370634500906125912_n.jpg"  width="400" height="377" alt= "play with dolphins">
+<h3> Play with Dolphins</h3>
+<a><img src="https://vignette.wikia.nocookie.net/phobia/images/a/ab/Sports2.jpg"  width="400" height="377" alt= "play sports"/>
+<h3> Be sporty</h3>
+
+<img src="https://cdn01.vulcanpost.com/wp-uploads/2014/07/Digital-Trends.jpg"  width="400" height="377" alt= "play sports"/>
+<h3> Relax and Watch Tv</h3>
+
+</body>
+<h2>
+</html> -->
